@@ -26,7 +26,7 @@ class CustomerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $customers = $em->getRepository('AppBundle:Customer')->findAll();
+        $customers = $em->getRepository(Customer::class)->findAll();
 
         return $this->render('customer/index.html.twig', array(
             'customers' => $customers,
@@ -42,7 +42,7 @@ class CustomerController extends Controller
     public function newAction(Request $request)
     {
         $customer = new Customer();
-        $form = $this->createForm('AppBundle\Form\CustomerType', $customer);
+        $form = $this->createForm(CustomerType::class, $customer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +84,7 @@ class CustomerController extends Controller
     public function editAction(Request $request, Customer $customer)
     {
         $deleteForm = $this->createDeleteForm($customer);
-        $editForm = $this->createForm('AppBundle\Form\CustomerType', $customer);
+        $editForm = $this->createForm(CustomerType::class, $customer);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

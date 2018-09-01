@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Worker;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,8 +18,7 @@ class WorkerType extends AbstractType
         $builder
             ->add('woFirstName')
             ->add('woLastName')
-            ->add('woEmail')
-        ;
+            ->add('woEmail');
     }
     
     /**
@@ -27,7 +27,7 @@ class WorkerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Worker'
+            'data_class' => Worker::class
         ));
     }
 }

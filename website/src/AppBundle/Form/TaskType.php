@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Project;
+use AppBundle\Entity\Task;
 use AppBundle\Entity\Worker;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -24,21 +25,11 @@ class TaskType extends AbstractType
             ->add('workerWo', EntityType::class, [
                 'class' => Worker::class,
                 'choice_label' => 'woLastName',
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
             ])
             ->add('projectPr', EntityType::class, [
                 'class' => Project::class,
                 'choice_label' => 'prName',
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
-            ])
-        ;
-
-
-
+            ]);
     }
     
     /**
@@ -47,7 +38,7 @@ class TaskType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Task'
+            'data_class' => Task::class
         ));
     }
 }

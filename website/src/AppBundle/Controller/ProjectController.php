@@ -26,7 +26,7 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $projects = $em->getRepository('AppBundle:Project')->findAll();
+        $projects = $em->getRepository(Project::class)->findAll();
 
         return $this->render('project/index.html.twig', array(
             'projects' => $projects,
@@ -42,7 +42,7 @@ class ProjectController extends Controller
     public function newAction(Request $request)
     {
         $project = new Project();
-        $form = $this->createForm('AppBundle\Form\ProjectType', $project);
+        $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -84,7 +84,7 @@ class ProjectController extends Controller
     public function editAction(Request $request, Project $project)
     {
         $deleteForm = $this->createDeleteForm($project);
-        $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
+        $editForm = $this->createForm(ProjectType::class, $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
