@@ -6,7 +6,7 @@ services:
       image: nginx
       volumes:
           - ./../website:/var/www/vhosts/website
-          - ./config/site.conf:/etc/nginx/conf.d/site.conf
+          - ./config/symfony28-site.conf:/etc/nginx/conf.d/site.conf
           - ./nginx/log:/var/log/nginx
       links:
           - php
