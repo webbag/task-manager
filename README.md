@@ -8,9 +8,8 @@ docker-compose -v
  version  1.17.1 or higher
 ```
 ```
-git clone git@github.com:webbag/docker-php-nginx-mysql.git
+git clone git@github.com:webbag/task-manager.git
 ``` 
-
 
 Create network from dedicated ip
 * If the network uses this ip then select others (eg 172.255.0.1 or similar)
@@ -24,7 +23,7 @@ docker network inspect nginx-proxy
 Add to /ete/hosts IP gateway
 * Also change the IP gateway in the _develop/.env file NGINX_PROXY_IP=172.18.0.1 
 ``` 
-sudo echo "172.18.0.1 demo.lh" >> /etc/hosts
+sudo echo "172.18.0.1 task-manager.lh" >> /etc/hosts
 ```
 
 ### Getting started DEV
@@ -42,7 +41,7 @@ cd _develop/
 docker-compose up -d
 ```
 Open url 
-http://demo.lh/ 
+http://task-manager.lh/ 
 
 * Down
 ```
@@ -75,9 +74,9 @@ docker rmi $(docker images -q -f dangling=true)
 ### MYSQL
 
 DEV
-* host:       demo.lh
+* host:       task-manager.lh
 * port:       3306
-* user:       demo
-* pass:       demo
-* pass_root:  demo
-* db:         demo
+* user:       task-manager
+* pass:       task-manager
+* pass_root:  task-manager
+* db:         task-manager
