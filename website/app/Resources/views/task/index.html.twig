@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Task list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Taid</th>
+                <th>Taname</th>
+                <th>Tadatecreate</th>
+                <th>Tapriority</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td><a href="{{ path('task_show', { 'id': task.taId }) }}">{{ task.taId }}</a></td>
+                <td>{{ task.taName }}</td>
+                <td>{% if task.taDateCreate %}{{ task.taDateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if task.taPriority %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('task_show', { 'id': task.taId }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('task_edit', { 'id': task.taId }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('task_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

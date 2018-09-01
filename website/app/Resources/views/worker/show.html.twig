@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Worker</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Woid</th>
+                <td>{{ worker.woId }}</td>
+            </tr>
+            <tr>
+                <th>Wofirstname</th>
+                <td>{{ worker.woFirstName }}</td>
+            </tr>
+            <tr>
+                <th>Wolastname</th>
+                <td>{{ worker.woLastName }}</td>
+            </tr>
+            <tr>
+                <th>Woemail</th>
+                <td>{{ worker.woEmail }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('worker_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
