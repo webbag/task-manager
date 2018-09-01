@@ -1,5 +1,5 @@
-FROM php:7.2-fpm
-MAINTAINER webtailor
+FROM php:7.1-fpm
+MAINTAINER webbag
 
 RUN apt-get update && apt-get install -y libssl-dev libxml2-dev zlib1g-dev libicu-dev libpq-dev libpng-dev libjpeg-dev curl git \
     && docker-php-ext-configure intl \
