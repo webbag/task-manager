@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+
+
+    /**
+    'urgent' => 'pilne'
+    'high => 'wysokie'
+    'normal' => 'normalne'
+    'low' => 'niskie'
+     */
+
+
+
     /**
      * @var integer
      *
@@ -29,6 +40,13 @@ class Task
     private $taName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ta_description", type="text", length=65535, nullable=true)
+     */
+    private $taDescription;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="ta_date_create", type="datetime", nullable=false)
@@ -36,11 +54,18 @@ class Task
     private $taDateCreate;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="ta_priority", type="boolean", nullable=false)
+     * @ORM\Column(name="ta_priority", type="integer", nullable=false)
      */
     private $taPriority;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ta_status", type="integer", nullable=false)
+     */
+    private $taStatus;
 
     /**
      * @var \Project
@@ -186,4 +211,41 @@ class Task
     {
         return $this->workerWo;
     }
+
+    /**
+     * @return string
+     */
+    public function getTaDescription()
+    {
+        return $this->taDescription;
+    }
+
+    /**
+     * @param string $taDescription
+     * @return Task
+     */
+    public function setTaDescription($taDescription)
+    {
+        $this->taDescription = $taDescription;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaStatus()
+    {
+        return $this->taStatus;
+    }
+
+    /**
+     * @param int $taStatus
+     * @return Task
+     */
+    public function setTaStatus($taStatus)
+    {
+        $this->taStatus = $taStatus;
+        return $this;
+    }
+
 }
