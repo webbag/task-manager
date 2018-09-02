@@ -14,12 +14,20 @@
                 <td>{{ task.taName }}</td>
             </tr>
             <tr>
+                <th>Tadescription</th>
+                <td>{{ task.taDescription }}</td>
+            </tr>
+            <tr>
                 <th>Tadatecreate</th>
                 <td>{% if task.taDateCreate %}{{ task.taDateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Tapriority</th>
-                <td>{% if task.taPriority %}Yes{% else %}No{% endif %}</td>
+                <td>{{ task.taPriority }}</td>
+            </tr>
+            <tr>
+                <th>Tastatus</th>
+                <td>{{ task.taStatus }}</td>
             </tr>
         </tbody>
     </table>

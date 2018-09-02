@@ -8,8 +8,10 @@
             <tr>
                 <th>Taid</th>
                 <th>Taname</th>
+                <th>Tadescription</th>
                 <th>Tadatecreate</th>
                 <th>Tapriority</th>
+                <th>Tastatus</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,8 +20,10 @@
             <tr>
                 <td><a href="{{ path('task_show', { 'id': task.taId }) }}">{{ task.taId }}</a></td>
                 <td>{{ task.taName }}</td>
+                <td>{{ task.taDescription }}</td>
                 <td>{% if task.taDateCreate %}{{ task.taDateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if task.taPriority %}Yes{% else %}No{% endif %}</td>
+                <td>{{ task.taPriority }}</td>
+                <td>{{ task.taStatus }}</td>
                 <td>
                     <ul>
                         <li>

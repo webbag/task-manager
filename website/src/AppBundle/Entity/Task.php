@@ -21,7 +21,7 @@ class Task
     const STATUS_OPEN = 'otwarte';
     const STATUS_CLOSE = 'zamknęte';
 
-    const PRIORITY = [self::PRIORITY_URGENT, self::PRIORITY_HIGH, self::PRIORITY_NORMAL, self::PRIORITY_NORMAL];
+    const PRIORITY = [self::PRIORITY_URGENT, self::PRIORITY_HIGH, self::PRIORITY_NORMAL, self::PRIORITY_LOW];
     const STATUS = [self::STATUS_OPEN, self::STATUS_CLOSE, self::STATUS_NEW];
 
     /**
