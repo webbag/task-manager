@@ -12,16 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+    const PRIORITY_URGENT = 'pilne';
+    const PRIORITY_HIGH = 'wysokie';
+    const PRIORITY_NORMAL = 'normalne';
+    const PRIORITY_LOW = 'niskie';
 
+    const STATUS_NEW = 'nowe';
+    const STATUS_OPEN = 'otwarte';
+    const STATUS_CLOSE = 'zamknęte';
 
-    /**
-    'urgent' => 'pilne'
-    'high => 'wysokie'
-    'normal' => 'normalne'
-    'low' => 'niskie'
-     */
-
-
+    const PRIORITY = [self::PRIORITY_URGENT, self::PRIORITY_HIGH, self::PRIORITY_NORMAL, self::PRIORITY_NORMAL];
+    const STATUS = [self::STATUS_OPEN, self::STATUS_CLOSE, self::STATUS_NEW];
 
     /**
      * @var integer
@@ -56,14 +57,14 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="ta_priority", type="integer", nullable=false)
+     * @ORM\Column(name="ta_priority", type="string", length=16, nullable=false)
      */
     private $taPriority;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="ta_status", type="integer", nullable=false)
+     * @ORM\Column(name="ta_status", type="string", length=16, nullable=false)
      */
     private $taStatus;
 
@@ -90,7 +91,7 @@ class Task
     /**
      * Get taId
      *
-     * @return integer 
+     * @return integer
      */
     public function getTaId()
     {
@@ -113,7 +114,7 @@ class Task
     /**
      * Get taName
      *
-     * @return string 
+     * @return string
      */
     public function getTaName()
     {
@@ -136,7 +137,7 @@ class Task
     /**
      * Get taDateCreate
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getTaDateCreate()
     {
@@ -144,14 +145,33 @@ class Task
     }
 
     /**
+     * @return string
+     */
+    public function getTaStatus()
+    {
+        return $this->taStatus;
+    }
+
+    /**
+     * @param string $taStatus
+     * @return Task
+     */
+    public function setTaStatus($taStatus)
+    {
+        $this->taStatus = in_array($taStatus, self::STATUS) ? $taStatus : self::STATUS_NEW;
+
+        return $this;
+    }
+
+    /**
      * Set taPriority
      *
-     * @param boolean $taPriority
+     * @param string $taPriority
      * @return Task
      */
     public function setTaPriority($taPriority)
     {
-        $this->taPriority = $taPriority;
+        $this->taPriority = in_array($taPriority, self::PRIORITY) ? $taPriority : self::PRIORITY_NORMAL;
 
         return $this;
     }
@@ -159,7 +179,7 @@ class Task
     /**
      * Get taPriority
      *
-     * @return boolean 
+     * @return string
      */
     public function getTaPriority()
     {
@@ -182,7 +202,7 @@ class Task
     /**
      * Get projectPr
      *
-     * @return \AppBundle\Entity\Project 
+     * @return \AppBundle\Entity\Project
      */
     public function getProjectPr()
     {
@@ -205,7 +225,7 @@ class Task
     /**
      * Get workerWo
      *
-     * @return \AppBundle\Entity\Worker 
+     * @return \AppBundle\Entity\Worker
      */
     public function getWorkerWo()
     {
@@ -227,24 +247,6 @@ class Task
     public function setTaDescription($taDescription)
     {
         $this->taDescription = $taDescription;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getTaStatus()
-    {
-        return $this->taStatus;
-    }
-
-    /**
-     * @param int $taStatus
-     * @return Task
-     */
-    public function setTaStatus($taStatus)
-    {
-        $this->taStatus = $taStatus;
         return $this;
     }
 
