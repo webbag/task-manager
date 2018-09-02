@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Worker list</h1>
 
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Woid</th>
@@ -23,10 +23,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('worker_show', { 'id': worker.woId }) }}">show</a>
+                            <a href="{{ path('worker_show', { 'id': worker.woId }) }}" class="btn btn-default" role="button">Podgląd</a>
                         </li>
                         <li>
-                            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}">edit</a>
+                            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}" class="btn btn-primary" role="button">Edycja</a>
                         </li>
                     </ul>
                 </td>
@@ -37,7 +37,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('worker_new') }}">Create a new entry</a>
+            <a href="{{ path('worker_new') }}" class="btn btn-primary" role="button">Dodaj nowy</a>
         </li>
     </ul>
 {% endblock %}

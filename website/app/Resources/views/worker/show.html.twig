@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Worker</h1>
 
-    <table>
+    <table class="table table-hover">
         <tbody>
             <tr>
                 <th>Woid</th>
@@ -26,14 +26,14 @@
 
     <ul>
         <li>
-            <a href="{{ path('worker_index') }}">Back to the list</a>
+            <a href="{{ path('worker_index') }}" class="btn btn-primary" role="button">Powrót do listy</a>
         </li>
         <li>
-            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}">Edit</a>
+            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}" class="btn btn-primary" role="button">Edycja</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-danger" value="Usuń">
             {{ form_end(delete_form) }}
         </li>
     </ul>
