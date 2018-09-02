@@ -28,8 +28,14 @@ class ProjectController extends Controller
 
         $projects = $em->getRepository(Project::class)->findAll();
 
+        $completedTask = $this->get('app.completed_task');
+
         return $this->render('project/index.html.twig', array(
             'projects' => $projects,
+            'task_completed_percent' => $completedTask->getCompletedPercent(),
+            'task_count_close' => $completedTask->getCountClose(),
+            'task_count_new' => $completedTask->getCountNew(),
+            'task_count_open' => $completedTask->getCountOpen(),
         ));
     }
 
