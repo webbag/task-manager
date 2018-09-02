@@ -2,48 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}Test{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Task Manager{% endblock %}</title>
     {% block stylesheets %}
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
               crossorigin="anonymous">
-        {#<link rel="stylesheet" href="/css/main.css">#}
     {% endblock %}
 </head>
+
 <body>
+
 <div class="container">
-
-
-    <div class="row">
-        <div class="col-2 navigation">
-            <nav class="nav flex-column">
-                <a class="nav-link active" href=""></a>
-            </nav>
-        </div>
-        <div class="col-10">
-
-            <div class="row body">
-                <div class="col shadow p-3 mb-5 bg-white rounded">
-
-                    {% block body %}
-
-                    {% endblock %}
-                </div>
-            </div>
-        </div>
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="{{ path('customer_index') }}">Klienci</a></li>
+                <li role="presentation"><a href="{{ path('project_index') }}">Projekty</a></li>
+                <li role="presentation"><a href="{{ path('worker_index') }}">Pracownicy</a></li>
+                <li role="presentation"><a href="{{ path('task_index') }}">Zadania</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">Manager Zadań</h3>
     </div>
-    <footer class="row">
-        <div class="col">
 
-        </div>
+    {% block body %}
+
+    {% endblock %}
+
+    <footer class="footer">
+        <p>&copy; 2018 WebBag, Inc.</p>
     </footer>
-</div>
-{% block javascripts %}
 
+</div> <!-- /container -->
+
+{% block javascripts %}
 
 {% endblock %}
 </body>
 </html>
+
 
