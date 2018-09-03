@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  web-tm:
+      build: ./config/dockerfiles/nginx
+      image: nginx
+      volumes:
+          - ./../website:/var/www/vhosts/website
+          - ./config/symfony28-site.prod.conf:/etc/nginx/conf.d/site.conf
+          - ./nginx/log:/var/log/nginx
+      links:
+          - php-tm
+      container_name: web-tm
+      expose:
+         - 80
+      environment:
+         VIRTUAL_HOST: task-manager.webbag.pl
+      restart: on-failure:10
+
+  php-tm:
+      build: ./config/dockerfiles/php/dev
+      image: dev-php:7.2-fpm
+      volumes:
+          - ./../website:/var/www/vhosts/website
+          - ./profiler:/tmp/xdebug
+          - /etc/localtime:/etc/localtime
+      container_name: php-tm
+      extra_hosts:
+          - "task-manager.webbag.pl:145.239.87.226"
+      environment:
+          XDEBUG_CONFIG: remote_host=145.239.87.226
+      working_dir: /var/www/vhosts/website/
+      restart: on-failure:10
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
