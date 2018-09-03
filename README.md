@@ -80,3 +80,9 @@ DEV
 * pass:       task-manager
 * pass_root:  task-manager
 * db:         task-manager
+
+
+![Alt text](https://github.com/webbag/task-manager/blob/master/_develop/database-task-manager-structure.png?raw=true "Model DB")
+
+
+
