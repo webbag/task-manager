@@ -19,7 +19,7 @@ services:
 
   php-tm:
       build: ./config/dockerfiles/php/dev
-      image: dev-php:7.2-fpm
+      image: dev-php:7.1-fpm
       volumes:
           - ./../website:/var/www/vhosts/website
           - ./profiler:/tmp/xdebug
