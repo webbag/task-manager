@@ -48,6 +48,12 @@ http://task-manager.lh/
 docker-compose down
 ```
 
+* Doctrine fixtures load
+
+```
+docker exec -it php php app/console doctrine:fixtures:load
+```
+
 #### Entrance to the container
 *  ```docker exec -it php bash ```
 *  ```docker exec -it web bash ```
