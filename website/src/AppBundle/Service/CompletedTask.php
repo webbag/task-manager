@@ -72,14 +72,14 @@ class CompletedTask
                     if (isset($this->countClose[$projectId])) {
                         $this->countClose[$projectId]++;
                     } else {
-                        $this->countClose[$projectId] = 0;
+                        $this->countClose[$projectId] = 1;
                     }
                 }
                 if ($item->getTaStatus() === Task::STATUS_OPEN) {
                     if (isset($this->countOpen[$projectId])) {
                         $this->countOpen[$projectId]++;
                     } else {
-                        $this->countOpen[$projectId] = 0;
+                        $this->countOpen[$projectId] = 1;
                     }
                 }
                 $projects[$projectId] = $projectId;
