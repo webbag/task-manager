@@ -60,26 +60,30 @@ class CompletedTask
         $projects = [];
         $tasks = $this->doctrine->getRepository(Task::class)->findAll();
         foreach ($tasks as $item) {
-            /**
-             * @var $item Task
-             */
-            $projectId = $item->getProjectPr()->getPrId();
 
-            if ($item->getTaStatus() === Task::STATUS_CLOSE) {
-                if (isset($this->countClose[$projectId])) {
-                    $this->countClose[$projectId]++;
-                } else {
-                    $this->countClose[$projectId] = 0;
+            if ($item->getProjectPr()) {
+
+                /**
+                 * @var $item Task
+                 */
+                $projectId = $item->getProjectPr()->getPrId();
+
+                if ($item->getTaStatus() === Task::STATUS_CLOSE) {
+                    if (isset($this->countClose[$projectId])) {
+                        $this->countClose[$projectId]++;
+                    } else {
+                        $this->countClose[$projectId] = 0;
+                    }
                 }
-            }
-            if ($item->getTaStatus() === Task::STATUS_OPEN) {
-                if (isset($this->countOpen[$projectId])) {
-                    $this->countOpen[$projectId]++;
-                } else {
-                    $this->countOpen[$projectId] = 0;
+                if ($item->getTaStatus() === Task::STATUS_OPEN) {
+                    if (isset($this->countOpen[$projectId])) {
+                        $this->countOpen[$projectId]++;
+                    } else {
+                        $this->countOpen[$projectId] = 0;
+                    }
                 }
+                $projects[$projectId] = $projectId;
             }
-            $projects[$projectId] = $projectId;
         }
 
         foreach ($projects as $projectId) {
