@@ -24,24 +24,24 @@ class Task
     const STATUS_OPEN = 1;
     const STATUS_CLOSE = 2;
 
-    const PRIORITY = [
+    public static $priority = [
         self::PRIORITY_URGENT => 'pilne',
         self::PRIORITY_HIGH => 'wysokie',
         self::PRIORITY_NORMAL => 'normalne',
         self::PRIORITY_LOW => 'niskie',
     ];
 
-    const PRIORITY_COLOR = [
+    public static $priorityColor = [
         self::PRIORITY_URGENT => 'danger',
         self::PRIORITY_HIGH => 'warning',
         self::PRIORITY_NORMAL => 'primary',
         self::PRIORITY_LOW => 'info',
     ];
-    const STATUS = [
+    public static $status = [
         self::STATUS_OPEN => 'otwarte',
         self::STATUS_CLOSE => 'zamknięte',
     ];
-    const STATUS_COLOR = [
+    public static $statusColor = [
         self::STATUS_OPEN => 'warning',
         self::STATUS_CLOSE => 'success',
     ];
@@ -182,7 +182,7 @@ class Task
      */
     public function getTaStatusName()
     {
-        return self::STATUS[$this->taStatus];
+        return self::$status[$this->taStatus];
     }
 
     /**
@@ -192,7 +192,7 @@ class Task
      */
     public function getTaStatusColor()
     {
-        return self::STATUS_COLOR[$this->taStatus];
+         return self::$statusColor[$this->taStatus];
     }
 
     /**
@@ -238,7 +238,7 @@ class Task
      */
     public function getTaPriorityName()
     {
-        return self::PRIORITY[$this->taPriority];
+        return self::$priority[$this->taPriority];
     }
 
     /**
@@ -248,7 +248,7 @@ class Task
      */
     public function getTaPriorityColor()
     {
-        return self::PRIORITY_COLOR[$this->taPriority];
+          return self::$priorityColor[$this->taPriority];
     }
 
     /**
@@ -257,7 +257,7 @@ class Task
      * @param \AppBundle\Entity\Project $projectPr
      * @return Task
      */
-    public function setProjectPr(\AppBundle\Entity\Project $projectPr = null)
+    public function setProjectPr($projectPr = null)
     {
         $this->projectPr = $projectPr;
 
@@ -280,7 +280,7 @@ class Task
      * @param \AppBundle\Entity\Worker $workerWo
      * @return Task
      */
-    public function setWorkerWo(\AppBundle\Entity\Worker $workerWo = null)
+    public function setWorkerWo($workerWo = null)
     {
         $this->workerWo = $workerWo;
 

@@ -29,7 +29,7 @@ class WorkerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $workers = $em->getRepository(Worker::class)->findAll();
+        $workers = $em->getRepository('AppBundle\Entity\Worker')->findAll();
 
         return $this->render('worker/index.html.twig', array(
             'workers' => $workers,
@@ -47,7 +47,7 @@ class WorkerController extends Controller
     public function newAction(Request $request)
     {
         $worker = new Worker();
-        $form = $this->createForm(WorkerType::class, $worker);
+        $form = $this->createForm('AppBundle\Form\WorkerType', $worker);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,7 +75,7 @@ class WorkerController extends Controller
      */
     public function editAction(Request $request, Worker $worker)
     {
-        $editForm = $this->createForm(WorkerType::class, $worker);
+        $editForm = $this->createForm('AppBundle\Form\WorkerType', $worker);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

@@ -31,8 +31,8 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tasks = $em->getRepository(Task::class)->findBy(['projectPr' => $id], ['taStatus' => 'ASC']);
-        $project = $em->getRepository(Project::class)->find($id);
+        $tasks = $em->getRepository('AppBundle\Entity\Task')->findBy(['projectPr' => $id], ['taStatus' => 'ASC']);
+        $project = $em->getRepository('AppBundle\Entity\Project')->find($id);
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
@@ -51,11 +51,11 @@ class TaskController extends Controller
     public function newAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $project = $em->getRepository(Project::class)->find($id);
+        $project = $em->getRepository('AppBundle\Entity\Project')->find($id);
 
         $task = new Task();
         $task->setProjectPr($project);
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm('AppBundle\Form\TaskType', $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -103,7 +103,7 @@ class TaskController extends Controller
     public function editAction(Request $request, Task $task)
     {
         $deleteForm = $this->createDeleteForm($task);
-        $editForm = $this->createForm(TaskType::class, $task);
+        $editForm = $this->createForm('AppBundle\Form\TaskType', $task);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

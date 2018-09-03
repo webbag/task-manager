@@ -32,7 +32,7 @@ class WorkerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Worker::class
+            'data_class' => 'AppBundle\Entity\Worker'
         ));
     }
 }

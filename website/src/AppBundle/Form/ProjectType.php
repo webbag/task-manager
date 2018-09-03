@@ -24,8 +24,8 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('prName', 'text', ['label' => 'Nazwa'])
-            ->add('customerCu', EntityType::class, [
-                'class' => Customer::class,
+            ->add('customerCu', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'class' => 'AppBundle\Entity\Customer',
                 'choice_label' => 'cuName',
                 'label' => 'Klient'
             ]);
@@ -37,7 +37,7 @@ class ProjectType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Project::class
+            'data_class' => 'AppBundle\Entity\Project'
         ));
     }
 }

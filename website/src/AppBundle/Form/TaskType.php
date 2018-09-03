@@ -3,10 +3,7 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Task;
-use AppBundle\Entity\Worker;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,16 +24,16 @@ class TaskType extends AbstractType
             ->add('taName', 'text', ['label' => 'Nazwa'])
             ->add('taDescription', 'textarea', ['label' => 'Opis'])
             ->add('taDateCreate', 'datetime', ['label' => 'Data utworzenia'])
-            ->add('taPriority', ChoiceType::class, [
-                'choices' => Task::PRIORITY,
-                 'label' => 'Priorytet'
+            ->add('taPriority', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices' => Task::$priority,
+                'label' => 'Priorytet'
             ])
-            ->add('taStatus', ChoiceType::class, [
-                'choices' => Task::STATUS,
+            ->add('taStatus', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'choices' => Task::$status,
                 'label' => 'Status'
             ])
-            ->add('workerWo', EntityType::class, [
-                'class' => Worker::class,
+            ->add('workerWo', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+                'class' => 'AppBundle\Entity\Worker',
                 'choice_label' => 'woName',
                 'label' => 'Pracownik',
             ]);

@@ -29,7 +29,7 @@ class ProjectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $projects = $em->getRepository(Project::class)->findAll();
+        $projects = $em->getRepository('AppBundle\Entity\Project')->findAll();
 
         $completedTask = $this->get('app.completed_task');
 
@@ -52,7 +52,7 @@ class ProjectController extends Controller
     public function newAction(Request $request)
     {
         $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
+        $form = $this->createForm('AppBundle\Form\ProjectType', $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -100,7 +100,7 @@ class ProjectController extends Controller
     public function editAction(Request $request, Project $project)
     {
         $deleteForm = $this->createDeleteForm($project);
-        $editForm = $this->createForm(ProjectType::class, $project);
+        $editForm = $this->createForm('AppBundle\Form\ProjectType', $project);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

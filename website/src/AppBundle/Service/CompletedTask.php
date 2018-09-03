@@ -58,7 +58,7 @@ class CompletedTask
     protected function init()
     {
         $projects = [];
-        $tasks = $this->doctrine->getRepository(Task::class)->findAll();
+        $tasks = $this->doctrine->getRepository('AppBundle:Task')->findAll();
         foreach ($tasks as $item) {
 
             if ($item->getProjectPr()) {
