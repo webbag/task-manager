@@ -43,14 +43,18 @@ class TaskController extends Controller
     /**
      * Creates a new Task entity.
      *
-     * @Route("/new", name="task_new")
+     * @Route("/{id}/new", name="task_new")
      * @Method({"GET", "POST"})
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $project = $em->getRepository(Project::class)->find($id);
+
         $task = new Task();
+        $task->setProjectPr($project);
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
@@ -59,12 +63,13 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
 
-            return $this->redirectToRoute('task_show', array('id' => $task->getTaId()));
+            return $this->redirectToRoute('task_index', array('id' => $id));
         }
 
         return $this->render('task/new.html.twig', array(
             'task' => $task,
             'form' => $form->createView(),
+            'project' => $project,
         ));
     }
 

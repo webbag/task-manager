@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h3>Zadania w projekcie "{{ project.prName }}" </h3>
+    <h3>Projekt "{{ project.prName }}" - lista zadań </h3>
 
     <table class="table table-hover">
         <thead>
@@ -9,7 +9,7 @@
             <th>Nazwa</th>
             <th>Data utworzenia</th>
             <th>Priorytet</th>
-            <th>Akcje</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +34,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('task_new') }}" class="btn btn-primary" role="button">Dodaj nowy</a>
+    <a href="{{ path('task_new', {'id': project.prId}) }}" class="btn btn-primary" role="button">Dodaj</a>
 
 {% endblock %}

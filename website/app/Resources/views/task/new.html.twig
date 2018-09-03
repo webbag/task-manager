@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Task creation</h1>
+    <h3>Projekt "{{ project.prName }}" - nowe zadanie </h3>
 
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Dodaj" class="btn btn-primary" role="button" />
+    {{ form_widget(form) }}
+    <input type="submit" value="Dodaj" class="btn btn-primary" role="button"/>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}" class="btn btn-primary" role="button">Powrót do listy</a>
-        </li>
-    </ul>
+    <br>
+    <a href="{{ path('task_index', {'id':project.prId}) }}" class="btn btn-primary" role="button">Powrót do listy
+        zadań</a>
 {% endblock %}

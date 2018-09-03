@@ -23,13 +23,12 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prName', 'text', ['label' => 'Nazwa']);
-        ->
-        add('customerCu', EntityType::class, [
-            'class' => Customer::class,
-            'choice_label' => 'cuName',
-            'label' => 'Klient'
-        ]);
+            ->add('prName', 'text', ['label' => 'Nazwa'])
+            ->add('customerCu', EntityType::class, [
+                'class' => Customer::class,
+                'choice_label' => 'cuName',
+                'label' => 'Klient'
+            ]);
     }
 
     /**

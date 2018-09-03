@@ -47,7 +47,7 @@ class Worker
     /**
      * Get woId.
      *
-     * @return integer 
+     * @return integer
      */
     public function getWoId()
     {
@@ -70,7 +70,7 @@ class Worker
     /**
      * Get woFirstName.
      *
-     * @return string 
+     * @return string
      */
     public function getWoFirstName()
     {
@@ -93,7 +93,7 @@ class Worker
     /**
      * Get woLastName.
      *
-     * @return string 
+     * @return string
      */
     public function getWoLastName()
     {
@@ -116,10 +116,21 @@ class Worker
     /**
      * Get woEmail.
      *
-     * @return string 
+     * @return string
      */
     public function getWoEmail()
     {
         return $this->woEmail;
     }
+
+    /**
+     * Get woFirstName woLastName.
+     *
+     * @return string
+     */
+    public function getWoName()
+    {
+        return $this->woFirstName . ' ' . $this->woLastName;
+    }
+
 }

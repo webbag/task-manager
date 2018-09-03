@@ -3,6 +3,8 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Task;
+use AppBundle\Entity\Worker;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,6 +34,11 @@ class TaskType extends AbstractType
             ->add('taStatus', ChoiceType::class, [
                 'choices' => Task::STATUS,
                 'label' => 'Status'
+            ])
+            ->add('workerWo', EntityType::class, [
+                'class' => Worker::class,
+                'choice_label' => 'woName',
+                'label' => 'Pracownik',
             ]);
     }
 

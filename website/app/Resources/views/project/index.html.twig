@@ -17,7 +17,7 @@
                 <td>{{ project.customerCu.cuName }}</td>
                 <td {% if task_count_open[project.prId] is defined %}title="Otwarte: {{ task_count_open[project.prId] }}, zamknięte: {{ task_count_close[project.prId] }}{% endif %}">
                     <div class="progress">
-                        {% if task_count_open[project.prId] is defined %}
+                        {% if task_count_open[project.prId] is defined  and task_completed_percent[project.prId] is defined %}
                             <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
                                  aria-valuemax="100" style="width: {{ task_completed_percent[project.prId] }}%;">
                                 {{ task_completed_percent[project.prId] }}%
