@@ -12,18 +12,35 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
-    const PRIORITY_URGENT = 'pilne';
-    const PRIORITY_HIGH = 'wysokie';
-    const PRIORITY_NORMAL = 'normalne';
-    const PRIORITY_LOW = 'niskie';
+    const PRIORITY_URGENT = 1;
+    const PRIORITY_HIGH = 2;
+    const PRIORITY_NORMAL = 3;
+    const PRIORITY_LOW = 4;
 
-    const STATUS_NEW = 'nowe';
-    const STATUS_OPEN = 'otwarte';
-    const STATUS_CLOSE = 'zamknęte';
+    const STATUS_OPEN = 1;
+    const STATUS_CLOSE = 2;
 
-    const PRIORITY = [self::PRIORITY_URGENT, self::PRIORITY_HIGH, self::PRIORITY_NORMAL, self::PRIORITY_LOW];
-    const STATUS = [self::STATUS_OPEN, self::STATUS_CLOSE, self::STATUS_NEW];
+    const PRIORITY = [
+        self::PRIORITY_URGENT => 'pilne',
+        self::PRIORITY_HIGH => 'wysokie',
+        self::PRIORITY_NORMAL => 'normalne',
+        self::PRIORITY_LOW => 'niskie',
+    ];
 
+    const PRIORITY_COLOR = [
+        self::PRIORITY_URGENT => 'danger',
+        self::PRIORITY_HIGH => 'warning',
+        self::PRIORITY_NORMAL => 'primary',
+        self::PRIORITY_LOW => 'info',
+    ];
+    const STATUS = [
+        self::STATUS_OPEN => 'otwarte',
+        self::STATUS_CLOSE => 'zamknięte',
+    ];
+    const STATUS_COLOR = [
+        self::STATUS_OPEN => 'warning',
+        self::STATUS_CLOSE => 'success',
+    ];
     /**
      * @var integer
      *
@@ -57,14 +74,14 @@ class Task
     /**
      * @var integer
      *
-     * @ORM\Column(name="ta_priority", type="string", length=16, nullable=false)
+     * @ORM\Column(name="ta_priority", type="smallint", nullable=false)
      */
     private $taPriority;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="ta_status", type="string", length=16, nullable=false)
+     * @ORM\Column(name="ta_status", type="smallint", nullable=false)
      */
     private $taStatus;
 
@@ -153,12 +170,27 @@ class Task
     }
 
     /**
+     * @return string
+     */
+    public function getTaStatusName()
+    {
+        return self::STATUS[$this->taStatus];
+    }
+    /**
+     * @return string
+     */
+    public function getTaStatusColor()
+    {
+        return self::STATUS_COLOR[$this->taStatus];
+    }
+
+    /**
      * @param string $taStatus
      * @return Task
      */
-    public function setTaStatus($taStatus)
+    public function setTaStatus(int $taStatus)
     {
-        $this->taStatus = in_array($taStatus, self::STATUS) ? $taStatus : self::STATUS_NEW;
+        $this->taStatus = $taStatus ?? SELF::STATUS[$taStatus];
 
         return $this;
     }
@@ -169,9 +201,9 @@ class Task
      * @param string $taPriority
      * @return Task
      */
-    public function setTaPriority($taPriority)
+    public function setTaPriority(int $taPriority)
     {
-        $this->taPriority = in_array($taPriority, self::PRIORITY) ? $taPriority : self::PRIORITY_NORMAL;
+        $this->taPriority = $taPriority ?? SELF::PRIORITY[$taPriority];
 
         return $this;
     }
@@ -183,7 +215,15 @@ class Task
      */
     public function getTaPriority()
     {
-        return $this->taPriority;
+        return self::PRIORITY[$this->taPriority];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTaPriorityColor()
+    {
+        return self::PRIORITY_COLOR[$this->taPriority];
     }
 
     /**
