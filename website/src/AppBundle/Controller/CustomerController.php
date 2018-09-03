@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Customer;
 use AppBundle\Form\CustomerType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Customer controller.
@@ -50,28 +50,12 @@ class CustomerController extends Controller
             $em->persist($customer);
             $em->flush();
 
-            return $this->redirectToRoute('customer_show', array('id' => $customer->getCuId()));
+            return $this->redirectToRoute('customer_index');
         }
 
         return $this->render('customer/new.html.twig', array(
             'customer' => $customer,
             'form' => $form->createView(),
-        ));
-    }
-
-    /**
-     * Finds and displays a Customer entity.
-     *
-     * @Route("/{id}", name="customer_show")
-     * @Method("GET")
-     */
-    public function showAction(Customer $customer)
-    {
-        $deleteForm = $this->createDeleteForm($customer);
-
-        return $this->render('customer/show.html.twig', array(
-            'customer' => $customer,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -83,7 +67,6 @@ class CustomerController extends Controller
      */
     public function editAction(Request $request, Customer $customer)
     {
-        $deleteForm = $this->createDeleteForm($customer);
         $editForm = $this->createForm(CustomerType::class, $customer);
         $editForm->handleRequest($request);
 
@@ -98,43 +81,7 @@ class CustomerController extends Controller
         return $this->render('customer/edit.html.twig', array(
             'customer' => $customer,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Deletes a Customer entity.
-     *
-     * @Route("/{id}", name="customer_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Customer $customer)
-    {
-        $form = $this->createDeleteForm($customer);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($customer);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('customer_index');
-    }
-
-    /**
-     * Creates a form to delete a Customer entity.
-     *
-     * @param Customer $customer The Customer entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Customer $customer)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('customer_delete', array('id' => $customer->getCuId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

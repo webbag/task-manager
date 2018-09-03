@@ -24,28 +24,19 @@ class TaskType extends AbstractType
             ->add('taDescription')
             ->add('taDateCreate', 'datetime')
             ->add('taPriority', ChoiceType::class, array(
-                'choices' => [
-                    Task::PRIORITY_URGENT => Task::PRIORITY_URGENT,
-                    Task::PRIORITY_HIGH => Task::PRIORITY_HIGH,
-                    Task::PRIORITY_NORMAL => Task::PRIORITY_NORMAL,
-                    Task::PRIORITY_LOW => Task::PRIORITY_LOW,
-                ],
+                'choices' => Task::PRIORITY
             ))
             ->add('taStatus', ChoiceType::class, array(
-                'choices' => [
-                    Task::STATUS_NEW => Task::STATUS_NEW,
-                    Task::STATUS_OPEN => Task::STATUS_OPEN,
-                    Task::STATUS_CLOSE => Task::STATUS_CLOSE,
-                ],
-            ))
-            ->add('workerWo', EntityType::class, [
-                'class' => Worker::class,
-                'choice_label' => 'woLastName',
-            ])
-            ->add('projectPr', EntityType::class, [
-                'class' => Project::class,
-                'choice_label' => 'prName',
-            ]);;
+                'choices' => Task::STATUS
+            ));
+//            ->add('workerWo', EntityType::class, [
+//                'class' => Worker::class,
+//                'choice_label' => 'woLastName',
+//            ])
+//            ->add('projectPr', EntityType::class, [
+//                'class' => Project::class,
+//                'choice_label' => 'prName',
+//            ]);;
     }
 
     /**

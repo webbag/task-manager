@@ -1,54 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Lista projektów</h1>
 
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Nazwa projektu</th>
-            <th>Nazwa klienta</th>
+            <th>Projekt</th>
+            <th>Klienta</th>
             <th>Procent realizacji</th>
-            <th>Akcje</th>
         </tr>
         </thead>
         <tbody>
         {% for project in projects %}
             <tr>
-                <td><a href="{{ path('project_show', { 'id': project.prId }) }}">{{ project.prId }}</a></td>
-                <td>{{ project.prName }}</td>
+                <td><a href="{{ path('task_index', {'id':project.prId}) }}"> {{ project.prName }}</a></td>
                 <td>{{ project.customerCu.cuName }}</td>
-                <td title="Nowe: {{ task_count_new }}, otwarte: {{ task_count_open }}, zamknięte: {{ task_count_close }}">
-
+                <td {% if task_count_open[project.prId] is defined %}title="Otwarte: {{ task_count_open[project.prId] }}, zamknięte: {{ task_count_close[project.prId] }}{% endif %}">
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                             aria-valuemax="100" style="width: {{ task_completed_percent }}%;">
-                            {{ task_completed_percent }}%
-                        </div>
+                        {% if task_count_open[project.prId] is defined %}
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: {{ task_completed_percent[project.prId] }}%;">
+                                {{ task_completed_percent[project.prId] }}%
+                            </div>
+                        {% else %}
+                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                 aria-valuemax="100" style="width: 0%;">
+                                0%
+                            </div>
+                        {% endif %}
                     </div>
-
-                </td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('project_show', { 'id': project.prId }) }}" class="btn btn-default"
-                               role="button">Podgląd</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('project_edit', { 'id': project.prId }) }}" class="btn btn-primary"
-                               role="button">Edycja</a>
-                        </li>
-                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('project_new') }}" class="btn btn-primary" role="button">Dodaj nowy</a>
-        </li>
-    </ul>
+
+    <a href="{{ path('project_new') }}" class="btn btn-primary" role="button">Dodaj projekt</a>
+
 {% endblock %}

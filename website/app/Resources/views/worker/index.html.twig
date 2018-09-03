@@ -1,43 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Worker list</h1>
+    <h3>Lista pracowników</h3>
 
     <table class="table table-hover">
         <thead>
-            <tr>
-                <th>Woid</th>
-                <th>Wofirstname</th>
-                <th>Wolastname</th>
-                <th>Woemail</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         {% for worker in workers %}
             <tr>
-                <td><a href="{{ path('worker_show', { 'id': worker.woId }) }}">{{ worker.woId }}</a></td>
                 <td>{{ worker.woFirstName }}</td>
                 <td>{{ worker.woLastName }}</td>
                 <td>{{ worker.woEmail }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('worker_show', { 'id': worker.woId }) }}" class="btn btn-default" role="button">Podgląd</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('worker_edit', { 'id': worker.woId }) }}" class="btn btn-primary" role="button">Edycja</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('worker_edit', { 'id': worker.woId }) }}" class="btn btn-primary" role="button">Edycja</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('worker_new') }}" class="btn btn-primary" role="button">Dodaj nowy</a>
-        </li>
-    </ul>
+    <a href="{{ path('worker_new') }}" class="btn btn-primary" role="button">Dodaj pracownika</a>
 {% endblock %}

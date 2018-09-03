@@ -1,48 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Task</h1>
+    <h3><span style="color: gray; font-size: 18px">#{{ task.taId }}</span> <strong> {{ task.taName }}</strong></h3>
 
     <table class="table table-hover">
         <tbody>
-            <tr>
-                <th>Taid</th>
-                <td>{{ task.taId }}</td>
-            </tr>
-            <tr>
-                <th>Taname</th>
-                <td>{{ task.taName }}</td>
-            </tr>
-            <tr>
-                <th>Tadescription</th>
-                <td>{{ task.taDescription }}</td>
-            </tr>
-            <tr>
-                <th>Tadatecreate</th>
-                <td>{% if task.taDateCreate %}{{ task.taDateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Tapriority</th>
-                <td>{{ task.taPriority }}</td>
-            </tr>
-            <tr>
-                <th>Tastatus</th>
-                <td>{{ task.taStatus }}</td>
-            </tr>
+        <tr>
+            <th>Data utworzenia</th>
+            <td>{% if task.taDateCreate %}{{ task.taDateCreate|date('Y-m-d H:i:s') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Priorytet</th>
+            <td>
+                <span class="label label-{{ task.taPriorityColor }}" role="alert">{{ task.taPriority }}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>
+                <span class="label label-{{ task.taStatusColor }}" role="alert">{{ task.taStatusName }}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Projekt</th>
+            <td>{{ task.projectPr.prName }}</td>
+        </tr>
+        <tr>
+            <th>Pracownik</th>
+            <td>{{ task.workerWo.woFirstName }} {{ task.workerWo.woLastName }} <span style="color: gray">&#x3C;{{ task.workerWo.woEmail }}&#x3E;</span></td>
+        </tr>
+        <tr>
+            <th>Opis</th>
+            <td>{{ task.taDescription|nl2br }}</td>
+        </tr>
+
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}" class="btn btn-primary" role="button">Powrót do listy</a>
-        </li>
-        <li>
-            <a href="{{ path('task_edit', { 'id': task.taId }) }}" class="btn btn-primary" role="button">Edycja</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" class="btn btn-danger" value="Usuń">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <br>
+    <br>
+    <a href="{{ path('task_index', {'id':task.projectPr.prId}) }}" class="btn btn-primary" role="button">Powrót do listy
+        zadań</a><br><br>
+    <a href="{{ path('task_edit', { 'id': task.taId }) }}" class="btn btn-primary" role="button">Edycja</a><br><br>
+    {{ form_start(delete_form) }}
+    <input type="submit" class="btn btn-danger" value="Usuń"><br>
+    {{ form_end(delete_form) }}
 {% endblock %}

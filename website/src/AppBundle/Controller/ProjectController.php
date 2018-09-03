@@ -34,7 +34,6 @@ class ProjectController extends Controller
             'projects' => $projects,
             'task_completed_percent' => $completedTask->getCompletedPercent(),
             'task_count_close' => $completedTask->getCountClose(),
-            'task_count_new' => $completedTask->getCountNew(),
             'task_count_open' => $completedTask->getCountOpen(),
         ));
     }
@@ -56,7 +55,7 @@ class ProjectController extends Controller
             $em->persist($project);
             $em->flush();
 
-            return $this->redirectToRoute('project_show', array('id' => $project->getPrId()));
+            return $this->redirectToRoute('project_index');
         }
 
         return $this->render('project/new.html.twig', array(

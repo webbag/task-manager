@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta name="author" content="Krzysztof Kromolicki">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Task Manager{% endblock %}</title>
@@ -19,10 +20,9 @@
     <div class="header clearfix">
         <nav>
             <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="{{ path('customer_index') }}">Klienci</a></li>
                 <li role="presentation"><a href="{{ path('project_index') }}">Projekty</a></li>
+                <li role="presentation"><a href="{{ path('customer_index') }}">Klienci</a></li>
                 <li role="presentation"><a href="{{ path('worker_index') }}">Pracownicy</a></li>
-                <li role="presentation"><a href="{{ path('task_index') }}">Zadania</a></li>
             </ul>
         </nav>
         <h3 class="text-muted">Manager Zadań</h3>
@@ -33,10 +33,17 @@
     {% endblock %}
 
     <footer class="footer">
-        <p>&copy; 2018 WebBag, Inc.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <p>
+            <a href="http://task-manager.webbag.pl">TaskManager</a>
+            2018
+            <a href="https://github.com/webbag/task-manager" target="_blank">GitHub</a></p>
     </footer>
 
-</div> <!-- /container -->
+</div>
 
 {% block javascripts %}
 

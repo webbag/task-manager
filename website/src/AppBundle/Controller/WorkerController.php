@@ -2,12 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Worker;
 use AppBundle\Form\WorkerType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Worker controller.
@@ -50,7 +50,7 @@ class WorkerController extends Controller
             $em->persist($worker);
             $em->flush();
 
-            return $this->redirectToRoute('worker_show', array('id' => $worker->getWoId()));
+            return $this->redirectToRoute('worker_index');
         }
 
         return $this->render('worker/new.html.twig', array(
@@ -59,21 +59,6 @@ class WorkerController extends Controller
         ));
     }
 
-    /**
-     * Finds and displays a Worker entity.
-     *
-     * @Route("/{id}", name="worker_show")
-     * @Method("GET")
-     */
-    public function showAction(Worker $worker)
-    {
-        $deleteForm = $this->createDeleteForm($worker);
-
-        return $this->render('worker/show.html.twig', array(
-            'worker' => $worker,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
 
     /**
      * Displays a form to edit an existing Worker entity.
@@ -83,7 +68,6 @@ class WorkerController extends Controller
      */
     public function editAction(Request $request, Worker $worker)
     {
-        $deleteForm = $this->createDeleteForm($worker);
         $editForm = $this->createForm(WorkerType::class, $worker);
         $editForm->handleRequest($request);
 
@@ -98,43 +82,7 @@ class WorkerController extends Controller
         return $this->render('worker/edit.html.twig', array(
             'worker' => $worker,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
-    /**
-     * Deletes a Worker entity.
-     *
-     * @Route("/{id}", name="worker_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Request $request, Worker $worker)
-    {
-        $form = $this->createDeleteForm($worker);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($worker);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('worker_index');
-    }
-
-    /**
-     * Creates a form to delete a Worker entity.
-     *
-     * @param Worker $worker The Worker entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm(Worker $worker)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('worker_delete', array('id' => $worker->getWoId())))
-            ->setMethod('DELETE')
-            ->getForm()
-        ;
-    }
 }

@@ -2,12 +2,13 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Project;
 use AppBundle\Entity\Task;
 use AppBundle\Form\TaskType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Task controller.
@@ -19,17 +20,19 @@ class TaskController extends Controller
     /**
      * Lists all Task entities.
      *
-     * @Route("/", name="task_index")
+     * @Route("/{id}", name="task_index")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tasks = $em->getRepository(Task::class)->findAll();
+        $tasks = $em->getRepository(Task::class)->findBy(['projectPr' => $id], ['taStatus' => 'ASC']);
+        $project = $em->getRepository(Project::class)->find($id);
 
         return $this->render('task/index.html.twig', array(
             'tasks' => $tasks,
+            'project' => $project,
         ));
     }
 
@@ -62,7 +65,7 @@ class TaskController extends Controller
     /**
      * Finds and displays a Task entity.
      *
-     * @Route("/{id}", name="task_show")
+     * @Route("/{id}/show", name="task_show")
      * @Method("GET")
      */
     public function showAction(Task $task)
@@ -119,7 +122,7 @@ class TaskController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('task_index');
+        return $this->redirectToRoute('task_index', ['id'=> $task->getProjectPr()->getPrId()]);
     }
 
     /**
@@ -134,7 +137,6 @@ class TaskController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('task_delete', array('id' => $task->getTaId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

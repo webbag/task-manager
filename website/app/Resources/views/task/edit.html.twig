@@ -1,21 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Task edit</h1>
+    <h3>Projekt "{{ task.projectPr.prName }}" - edycja zadania</h3>
 
     {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" class="btn btn-success" value="Zapisz">
+    {{ form_widget(edit_form) }}
+    <input type="submit" class="btn btn-success" value="Zapisz">
     {{ form_end(edit_form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('task_index') }}" class="btn btn-primary" role="button">Powrót do listy</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" class="btn btn-danger" value="Usuń">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <br>
+    <a href="{{ path('task_index', {'id': task.projectPr.prId}) }}" class="btn btn-primary" role="button">Powrót do
+        listy zadań</a><br>
+    {{ form_start(delete_form) }}<br>
+    <input type="submit" class="btn btn-danger" value="Usuń"><br>
+    {{ form_end(delete_form) }}
 {% endblock %}
