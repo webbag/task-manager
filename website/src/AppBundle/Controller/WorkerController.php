@@ -10,8 +10,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Worker controller.
+ * Worker CRUD controller.
  *
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
+ * @package AppBundle\Controller
  * @Route("/worker")
  */
 class WorkerController extends Controller
@@ -21,6 +23,7 @@ class WorkerController extends Controller
      *
      * @Route("/", name="worker_index")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -38,6 +41,8 @@ class WorkerController extends Controller
      *
      * @Route("/new", name="worker_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -59,12 +64,14 @@ class WorkerController extends Controller
         ));
     }
 
-
     /**
      * Displays a form to edit an existing Worker entity.
      *
      * @Route("/{id}/edit", name="worker_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Worker $worker
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Worker $worker)
     {

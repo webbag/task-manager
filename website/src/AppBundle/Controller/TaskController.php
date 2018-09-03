@@ -11,17 +11,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Task controller.
+ * Task CRUD controller.
  *
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
+ * @package AppBundle\Controller
  * @Route("/task")
  */
 class TaskController extends Controller
 {
     /**
-     * Lists all Task entities.
+     * Lists all Task entities by project id.
      *
      * @Route("/{id}", name="task_index")
      * @Method("GET")
+     * @param $id Project::getPrId()
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction($id)
     {
@@ -41,6 +45,8 @@ class TaskController extends Controller
      *
      * @Route("/new", name="task_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -67,6 +73,8 @@ class TaskController extends Controller
      *
      * @Route("/{id}/show", name="task_show")
      * @Method("GET")
+     * @param Task $task
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Task $task)
     {
@@ -83,6 +91,9 @@ class TaskController extends Controller
      *
      * @Route("/{id}/edit", name="task_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Task $task
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Task $task)
     {
@@ -110,6 +121,9 @@ class TaskController extends Controller
      *
      * @Route("/{id}", name="task_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param Task $task
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Task $task)
     {
@@ -128,9 +142,8 @@ class TaskController extends Controller
     /**
      * Creates a form to delete a Task entity.
      *
-     * @param Task $task The Task entity
-     *
-     * @return \Symfony\Component\Form\Form The form
+     * @param Task $task
+     * @return \Symfony\Component\Form\Form
      */
     private function createDeleteForm(Task $task)
     {

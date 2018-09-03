@@ -7,6 +7,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class CustomerType.
+ *
+ * @package AppBundle\Form
+ */
 class CustomerType extends AbstractType
 {
     /**
@@ -16,9 +21,9 @@ class CustomerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('cuName');
+            ->add('cuName', 'text', ['label' => 'Nazwa']);
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

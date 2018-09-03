@@ -5,13 +5,17 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Task
+ * Task model.
  *
- * @ORM\Table(name="task", indexes={@ORM\Index(name="task_project_pr_id_fk", columns={"project_pr_id"}), @ORM\Index(name="task_worker_wo_id_fk", columns={"worker_wo_id"})})
+ * @ORM\Table(name="task", indexes={@ORM\Index(name="task_project_pr_id_fk", columns={"project_pr_id"}),
+ *     @ORM\Index(name="task_worker_wo_id_fk", columns={"worker_wo_id"})})
  * @ORM\Entity
+ * @package AppBundle\Entity
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
  */
 class Task
 {
+
     const PRIORITY_URGENT = 1;
     const PRIORITY_HIGH = 2;
     const PRIORITY_NORMAL = 3;
@@ -106,7 +110,7 @@ class Task
     private $workerWo;
 
     /**
-     * Get taId
+     * Get taId.
      *
      * @return integer
      */
@@ -116,7 +120,7 @@ class Task
     }
 
     /**
-     * Set taName
+     * Set taName.
      *
      * @param string $taName
      * @return Task
@@ -129,7 +133,7 @@ class Task
     }
 
     /**
-     * Get taName
+     * Get taName.
      *
      * @return string
      */
@@ -139,7 +143,7 @@ class Task
     }
 
     /**
-     * Set taDateCreate
+     * Set taDateCreate.
      *
      * @param \DateTime $taDateCreate
      * @return Task
@@ -152,7 +156,7 @@ class Task
     }
 
     /**
-     * Get taDateCreate
+     * Get taDateCreate.
      *
      * @return \DateTime
      */
@@ -162,7 +166,9 @@ class Task
     }
 
     /**
-     * @return string
+     * Get taStatus number.
+     *
+     * @return int
      */
     public function getTaStatus()
     {
@@ -170,13 +176,18 @@ class Task
     }
 
     /**
+     * Get status name.
+     *
      * @return string
      */
     public function getTaStatusName()
     {
         return self::STATUS[$this->taStatus];
     }
+
     /**
+     * Get class css bootstrap.
+     *
      * @return string
      */
     public function getTaStatusColor()
@@ -185,41 +196,55 @@ class Task
     }
 
     /**
-     * @param string $taStatus
-     * @return Task
-     */
-    public function setTaStatus(int $taStatus)
-    {
-        $this->taStatus = $taStatus ?? SELF::STATUS[$taStatus];
-
-        return $this;
-    }
-
-    /**
-     * Set taPriority
+     * Set taStatus.
      *
-     * @param string $taPriority
+     * @param int $taStatus self::STATUS_OPEN | self::STATUS_CLOSE
      * @return Task
      */
-    public function setTaPriority(int $taPriority)
+    public function setTaStatus($taStatus)
     {
-        $this->taPriority = $taPriority ?? SELF::PRIORITY[$taPriority];
+        $this->taStatus = $taStatus;
 
         return $this;
     }
 
     /**
-     * Get taPriority
+     * Set taPriority number.
+     *
+     * @param int $taPriority self::PRIORITY_URGENT | self::PRIORITY_HIGH  | self::PRIORITY_NORMAL  | self::PRIORITY_LOW
+     * @return Task
+     */
+    public function setTaPriority($taPriority)
+    {
+        $this->taPriority = $taPriority;
+
+        return $this;
+    }
+
+    /**
+     * Get taPriority.
+     *
+     * @return int
+     */
+    public function getTaPriority()
+    {
+        return $this->taPriority;
+    }
+
+    /**
+     * Get priority name.
      *
      * @return string
      */
-    public function getTaPriority()
+    public function getTaPriorityName()
     {
         return self::PRIORITY[$this->taPriority];
     }
 
     /**
-     * @return mixed
+     * Get class css bootstrap.
+     *
+     * @return string
      */
     public function getTaPriorityColor()
     {
@@ -227,7 +252,7 @@ class Task
     }
 
     /**
-     * Set projectPr
+     * Set projectPr.
      *
      * @param \AppBundle\Entity\Project $projectPr
      * @return Task
@@ -240,7 +265,7 @@ class Task
     }
 
     /**
-     * Get projectPr
+     * Get projectPr.
      *
      * @return \AppBundle\Entity\Project
      */
@@ -250,7 +275,7 @@ class Task
     }
 
     /**
-     * Set workerWo
+     * Set workerWo.
      *
      * @param \AppBundle\Entity\Worker $workerWo
      * @return Task
@@ -263,7 +288,7 @@ class Task
     }
 
     /**
-     * Get workerWo
+     * Get workerWo.
      *
      * @return \AppBundle\Entity\Worker
      */
@@ -273,6 +298,8 @@ class Task
     }
 
     /**
+     * Get taDescription.
+     *
      * @return string
      */
     public function getTaDescription()
@@ -281,6 +308,8 @@ class Task
     }
 
     /**
+     * Set taDescription.
+     *
      * @param string $taDescription
      * @return Task
      */

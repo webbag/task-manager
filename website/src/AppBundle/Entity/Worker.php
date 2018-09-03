@@ -5,10 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Worker
+ * Worker model.
  *
  * @ORM\Table(name="worker")
  * @ORM\Entity
+ * @package AppBundle\Entity
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
  */
 class Worker
 {
@@ -43,7 +45,7 @@ class Worker
     private $woEmail;
 
     /**
-     * Get woId
+     * Get woId.
      *
      * @return integer 
      */
@@ -53,7 +55,7 @@ class Worker
     }
 
     /**
-     * Set woFirstName
+     * Set woFirstName.
      *
      * @param string $woFirstName
      * @return Worker
@@ -66,7 +68,7 @@ class Worker
     }
 
     /**
-     * Get woFirstName
+     * Get woFirstName.
      *
      * @return string 
      */
@@ -76,7 +78,7 @@ class Worker
     }
 
     /**
-     * Set woLastName
+     * Set woLastName.
      *
      * @param string $woLastName
      * @return Worker
@@ -89,7 +91,7 @@ class Worker
     }
 
     /**
-     * Get woLastName
+     * Get woLastName.
      *
      * @return string 
      */
@@ -99,7 +101,7 @@ class Worker
     }
 
     /**
-     * Set woEmail
+     * Set woEmail.
      *
      * @param string $woEmail
      * @return Worker
@@ -112,7 +114,7 @@ class Worker
     }
 
     /**
-     * Get woEmail
+     * Get woEmail.
      *
      * @return string 
      */

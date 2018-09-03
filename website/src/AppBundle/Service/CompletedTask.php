@@ -8,8 +8,11 @@ use AppBundle\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 
 /**
+ * Percentage of implementation (ratio of the number of tasks closed to all tasks).
+ *
  * Class CompletedTask
  * @package AppBundle\Service
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
  */
 class CompletedTask
 {
@@ -36,7 +39,8 @@ class CompletedTask
     protected $completedPercent = [];
 
     /**
-     * CompletedTask constructor.
+     * CompletedTask constructor initiation function.
+     *
      * @param Registry $doctrine
      */
     public function __construct(Registry $doctrine)
@@ -45,6 +49,12 @@ class CompletedTask
         $this->init();
     }
 
+    /**
+     * Initiation function.
+     * Set countOpen, countClose, countAll task
+     *
+     * @return void
+     */
     protected function init()
     {
         $projects = [];
@@ -87,14 +97,22 @@ class CompletedTask
 
     }
 
+    /**
+     * Set completedPercent by count close count all task.
+     *
+     * @param $projectId
+     */
     protected function setPercentCompleted($projectId)
     {
         if ($this->countAll[$projectId] > 0 && isset($this->countClose[$projectId])) {
-            $this->completedPercent[$projectId] = round(($this->countClose[$projectId] * 100) / $this->countAll[$projectId], 0);
+            $this->completedPercent[$projectId] =
+                round(($this->countClose[$projectId] * 100) / $this->countAll[$projectId], 0);
         }
     }
 
     /**
+     * Get completedPercent.
+     *
      * @return int
      */
     public function getCompletedPercent()
@@ -104,6 +122,8 @@ class CompletedTask
     }
 
     /**
+     * Get countClose.
+     *
      * @return int
      */
     public function getCountClose()
@@ -112,6 +132,8 @@ class CompletedTask
     }
 
     /**
+     * Get countOpen.
+     *
      * @return int
      */
     public function getCountOpen()

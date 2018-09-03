@@ -10,8 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Customer controller.
- *
+ * Customer CRUD controller.
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
+ * @package AppBundle\Controller
  * @Route("/customer")
  */
 class CustomerController extends Controller
@@ -21,6 +22,7 @@ class CustomerController extends Controller
      *
      * @Route("/", name="customer_index")
      * @Method("GET")
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction()
     {
@@ -38,6 +40,8 @@ class CustomerController extends Controller
      *
      * @Route("/new", name="customer_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -64,6 +68,9 @@ class CustomerController extends Controller
      *
      * @Route("/{id}/edit", name="customer_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Customer $customer
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Customer $customer)
     {

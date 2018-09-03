@@ -5,10 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Project
+ * Project model.
  *
  * @ORM\Table(name="project", indexes={@ORM\Index(name="project_customer_cu_id_fk", columns={"customer_cu_id"})})
  * @ORM\Entity
+ * @package AppBundle\Entity
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
  */
 class Project
 {
@@ -39,7 +41,7 @@ class Project
     private $customerCu;
 
     /**
-     * Get prId
+     * Get prId.
      *
      * @return integer 
      */
@@ -49,7 +51,7 @@ class Project
     }
 
     /**
-     * Set prName
+     * Set prName.
      *
      * @param string $prName
      * @return Project
@@ -62,7 +64,7 @@ class Project
     }
 
     /**
-     * Get prName
+     * Get prName.
      *
      * @return string 
      */
@@ -72,7 +74,7 @@ class Project
     }
 
     /**
-     * Set customerCu
+     * Set customerCu.
      *
      * @param \AppBundle\Entity\Customer $customerCu
      * @return Project
@@ -85,7 +87,7 @@ class Project
     }
 
     /**
-     * Get customerCu
+     * Get customerCu.
      *
      * @return \AppBundle\Entity\Customer 
      */

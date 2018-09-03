@@ -5,10 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Customer
+ * Customer model.
  *
  * @ORM\Table(name="customer")
  * @ORM\Entity
+ * @package AppBundle\Entity
+ * @author Krzysztof Kromolicki <k.kromolicki@gmail.com>
  */
 class Customer
 {
@@ -29,7 +31,7 @@ class Customer
     private $cuName;
 
     /**
-     * Get cuId
+     * Get cuId.
      *
      * @return integer 
      */
@@ -39,7 +41,7 @@ class Customer
     }
 
     /**
-     * Set cuName
+     * Set cuName.
      *
      * @param string $cuName
      * @return Customer
@@ -52,7 +54,7 @@ class Customer
     }
 
     /**
-     * Get cuName
+     * Get cuName.
      *
      * @return string 
      */

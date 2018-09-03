@@ -2,15 +2,17 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Project;
 use AppBundle\Entity\Task;
-use AppBundle\Entity\Worker;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class TaskType.
+ *
+ * @package AppBundle\Form
+ */
 class TaskType extends AbstractType
 {
     /**
@@ -20,23 +22,17 @@ class TaskType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taName')
-            ->add('taDescription')
-            ->add('taDateCreate', 'datetime')
-            ->add('taPriority', ChoiceType::class, array(
-                'choices' => Task::PRIORITY
-            ))
-            ->add('taStatus', ChoiceType::class, array(
-                'choices' => Task::STATUS
-            ));
-//            ->add('workerWo', EntityType::class, [
-//                'class' => Worker::class,
-//                'choice_label' => 'woLastName',
-//            ])
-//            ->add('projectPr', EntityType::class, [
-//                'class' => Project::class,
-//                'choice_label' => 'prName',
-//            ]);;
+            ->add('taName', 'text', ['label' => 'Nazwa'])
+            ->add('taDescription', 'textarea', ['label' => 'Opis'])
+            ->add('taDateCreate', 'datetime', ['label' => 'Data utworzenia'])
+            ->add('taPriority', ChoiceType::class, [
+                'choices' => Task::PRIORITY,
+                 'label' => 'Priorytet'
+            ])
+            ->add('taStatus', ChoiceType::class, [
+                'choices' => Task::STATUS,
+                'label' => 'Status'
+            ]);
     }
 
     /**

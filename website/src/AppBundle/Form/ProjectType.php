@@ -9,6 +9,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * Class ProjectType.
+ *
+ * @package AppBundle\Form
+ */
 class ProjectType extends AbstractType
 {
     /**
@@ -18,11 +23,13 @@ class ProjectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prName')
-            ->add('customerCu', EntityType::class, [
-                'class' => Customer::class,
-                'choice_label' => 'cuName',
-            ]);
+            ->add('prName', 'text', ['label' => 'Nazwa']);
+        ->
+        add('customerCu', EntityType::class, [
+            'class' => Customer::class,
+            'choice_label' => 'cuName',
+            'label' => 'Klient'
+        ]);
     }
 
     /**
