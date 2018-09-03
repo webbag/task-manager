@@ -20,23 +20,20 @@ class CompletedTask
     /**
      * @var int
      */
-    protected $countClose = 0;
+    protected $countClose = [];
+
     /**
      * @var int
      */
-    protected $countNew = 0;
+    protected $countOpen = [];
     /**
      * @var int
      */
-    protected $countOpen = 0;
+    protected $countAll = [];
     /**
      * @var int
      */
-    protected $countAll = 0;
-    /**
-     * @var int
-     */
-    protected $completedPercent = 0;
+    protected $completedPercent = [];
 
     /**
      * CompletedTask constructor.
@@ -46,24 +43,54 @@ class CompletedTask
     {
         $this->doctrine = $doctrine;
         $this->init();
-        $this->setPercentCompleted();
     }
 
     protected function init()
     {
+        $projects = [];
         $tasks = $this->doctrine->getRepository(Task::class)->findAll();
-        $this->countAll = count($tasks);
         foreach ($tasks as $item) {
-            $item->getTaStatus() === Task::STATUS_CLOSE ? $this->countClose++ : null;
-            $item->getTaStatus() === Task::STATUS_OPEN ? $this->countOpen++ : null;
-            $item->getTaStatus() === Task::STATUS_NEW ? $this->countNew++ : null;
+            /**
+             * @var $item Task
+             */
+            $projectId = $item->getProjectPr()->getPrId();
+
+            if ($item->getTaStatus() === Task::STATUS_CLOSE) {
+                if (isset($this->countClose[$projectId])) {
+                    $this->countClose[$projectId]++;
+                } else {
+                    $this->countClose[$projectId] = 0;
+                }
+            }
+            if ($item->getTaStatus() === Task::STATUS_OPEN) {
+                if (isset($this->countOpen[$projectId])) {
+                    $this->countOpen[$projectId]++;
+                } else {
+                    $this->countOpen[$projectId] = 0;
+                }
+            }
+            $projects[$projectId] = $projectId;
         }
+
+        foreach ($projects as $projectId) {
+
+            if (!isset($this->countOpen[$projectId])) {
+                $this->countOpen[$projectId] = 0;
+            }
+            if (!isset($this->countClose[$projectId])) {
+                $this->countClose[$projectId] = 0;
+            }
+            $this->countAll[$projectId] = $this->countOpen[$projectId] + $this->countClose[$projectId];
+
+            $this->setPercentCompleted($projectId);
+        }
+
     }
 
-    protected function setPercentCompleted()
+    protected function setPercentCompleted($projectId)
     {
-        if ($this->countAll > 0) {
-            $this->completedPercent = ($this->countClose * 100) / $this->countAll;
+        if ($this->countAll[$projectId] > 0 && isset($this->countClose[$projectId])) {
+            $this->completedPercent[$projectId] = round(($this->countClose[$projectId] * 100) / $this->countAll[$projectId], 0);
         }
     }
 
@@ -72,6 +99,7 @@ class CompletedTask
      */
     public function getCompletedPercent()
     {
+
         return $this->completedPercent;
     }
 
@@ -81,14 +109,6 @@ class CompletedTask
     public function getCountClose()
     {
         return $this->countClose;
-    }
-
-    /**
-     * @return int
-     */
-    public function getCountNew()
-    {
-        return $this->countNew;
     }
 
     /**
